@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Simple registration form</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<input class="c-checkbox" type="checkbox" id="start">
+<input class="c-checkbox" type="checkbox" id="progress2">
+<input class="c-checkbox" type="checkbox" id="progress3">
+<input class="c-checkbox" type="checkbox" id="progress4">
+<input class="c-checkbox" type="checkbox" id="finish">
+<div class="c-form__progress"></div>
+
+<div class="c-formContainer">
+  <div class="c-welcome">Welcome aboard!</div>
+  <form class="c-form" action="">
+    <div class="c-form__group">
+      <label class="c-form__label" for="name">
+                    <input
+                        type="text"
+                        id="name"
+                        class="c-form__input"
+                        placeholder=" "
+                        pattern="[^\s]+"
+                        required>
+
+                    <label class="c-form__next" for="progress2" role="button">
+                        <span class="c-form__nextIcon"></span>
+                    </label>
+
+      <span class="c-form__groupLabel">성함을 적어주세요.</span>
+      <b class="c-form__border"></b>
+      </label>
+    </div>
+
+    <div class="c-form__group">
+      <label class="c-form__label" for="email">
+                    <input
+                        type="email"
+                        id="email"
+                        class="c-form__input"
+                        placeholder=" "
+                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                        required>
+
+                    <label class="c-form__next" for="progress3" role="button">
+                        <span class="c-form__nextIcon"></span>
+                    </label>
+
+      <span class="c-form__groupLabel">이메일을 입력해주세요.</span>
+      <b class="c-form__border"></b>
+      </label>
+    </div>
+
+
+    <div class="c-form__group">
+      <label class="c-form__label" for="job">
+                    <input
+                        type="text"
+                        id="job"
+                        class="c-form__input"
+                        placeholder=" "
+                        required>
+
+                    <label class="c-form__next" for="progress4" role="button">
+                        <span class="c-form__nextIcon"></span>
+                    </label>
+
+      <span class="c-form__groupLabel">교사 / 학생 입력해주세요.</span>
+      <b class="c-form__border"></b>
+      </label>
+    </div>
+
+    <div class="c-form__group">
+      <label class="c-form__label" for="pw">
+                    <input
+                        type="password"
+                        id="pw"
+                        class="c-form__input"
+                        placeholder=" "
+                        required>
+
+                    <label class="c-form__next" for="finish" role="button">
+                        <span class="c-form__nextIcon"></span>
+                    </label>
+
+      <span class="c-form__groupLabel">비밀번호를 입력해주세요.( 8 ~ 20자 )</span>
+      <b class="c-form__border"></b>
+      </label>
+    </div>
+
+    <label class="c-form__toggle" for="start">Register<span class="c-form__toggleIcon"></span></label>
+  </form>
+</div>
+<!-- partial -->
+  <script  src="./register.css"></script>
+
+</body>
+</html>
