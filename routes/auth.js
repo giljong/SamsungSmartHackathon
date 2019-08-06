@@ -25,10 +25,10 @@ router.get('/', (req, res) => {
             req.connection.remoteAddress ||
             req.socket.remoteAddress ||
             req.connection.socket.remoteAddress;
-        db.query('select AUTHKEY from Users where ID = ?', req.session.user, (err, result) => {
+        db.query('select AUTHKEY from Users where EMAIL = ?', req.session.user, (err, result) => {
             if (err) console.log(err);
             if ((key === result[0].AUTHKEY)) {
-                db.query('update Users set FLAG=1 where ID = ?', req.session.user);
+                db.query('update Users set FLAG=1 where EMAIL = ?', req.session.user);
                 req.session.flag = 1;
                 req.session.save(() => {
                     res.send('<script type="text/javascript">alert("인증성공!(๑′ᴗ‵๑)");window.location.href="/";</script>');

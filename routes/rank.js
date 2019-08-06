@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/',(req,res) => {
     let GameNum = req.query.id;
     if(GameNum !== undefined && req.session.user !== undefined){
-        db.query('select * from rank where pkey = ? ordry by score desc',GameNum,(err,result) =>{
+        db.query('select * from rank where pkey = ? and grade = ? and class = ? ordry by score desc',[GameNum,req.session.grade,req.session.class],(err,result) =>{
             if(err) console.log(err);
             res.render('rank.ejs',{
                 data : result,
@@ -25,7 +25,7 @@ router.get('/',(req,res) => {
         })
     }
     else
-        res.redirect('/');
+        res.redirect('/login');
 })
 
 module.exports = router;
