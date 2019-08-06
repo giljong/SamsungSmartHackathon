@@ -1,35 +1,158 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <meta charset="UTF-8">
-  <title>Material Design SignIn Interaction</title>
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="../public/css/login.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <title>Register</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
   <style>
-		img { display: block; margin: 0px auto; }
+    img { display: block; margin: 0px auto; }
     @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-	</style>
-<!-- partial:index.partial.html -->
+  </style>
   <img width = 375 height = 150 src = "./logo.png">
-<div class="app" style = "height : 450px">
-  <div class="content">
-    <div class="header hidden"></div>
-    <div class="button">
-      <div class="sign-in">SIGN IN</div>
-      <form class="hidden form">
-        <br>
-        <input type="email" placeholder="email"/>
-        <input type="password" placeholder="Password"/>
-      </form>
-      <button class="hidden"><span class="text">DONE</span></button>
-    </div>
+  <div id="app">
+    <v-app id="inspire">
+      <v-layout justify-center>
+        <v-flex xs12 sm10 md8 lg6>
+          <v-card ref="form">
+            <v-card-text>
+              <v-text-field
+                ref="email"
+                v-model="email"
+                :rules="[() => !!email || 'This field is required']"
+                label="Email"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="pwd"
+                v-model="pwd"
+                :rules="[() => !!pwd || 'This field is required']"
+                :error-messages="errorMessages"
+                label="password"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="name"
+                v-model="name"
+                :rules="[() => !!name || 'This field is required']"
+                :error-messages="errorMessages"
+                label="Name"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="grade"
+                v-model="grade"
+                :rules="[() => !!grade || 'This field is required']"
+                :error-messages="errorMessages"
+                label="Grade"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="ban"
+                v-model="ban"
+                :rules="[() => !!ban || 'This field is required']"
+                :error-messages="errorMessages"
+                label="Class"
+                required
+              ></v-text-field>
+            </v-card-text>
+            <v-divider class="mt-12"></v-divider>
+            <v-card-actions>
+              <v-btn text>Cancel</v-btn>
+              <v-spacer></v-spacer>
+              <v-slide-x-reverse-transition>
+                <v-tooltip
+                  v-if="formHasErrors"
+                  left
+                >
+                </v-tooltip>
+              </v-slide-x-reverse-transition>
+              <v-btn color="primary" text @click="submit">Submit</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-app>
   </div>
-</div>
-<!-- partial -->
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script  src="../public/src/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+  new Vue({
+    el: '#app',
+    vuetify: new Vuetify(),
+    data: () => ({
+      countries: [1,2,3,4],
+      errorMessages: '',
+      name: null,
+      address: null,
+      city: null,
+      state: null,
+      zip: null,
+      country: null,
+      formHasErrors: false,
+    }),
 
+    computed: {
+      form () {
+        return {
+          name: this.name,
+          address: this.address,
+          city: this.city,
+          state: this.state,
+          zip: this.zip,
+          country: this.country,
+        }
+      },
+    },
+
+    watch: {
+      name () {
+        this.errorMessages = ''
+      },
+    },
+
+    methods: {
+      addressCheck () {
+        this.errorMessages = this.address && !this.name
+          ? 'Hey! I\'m required'
+          : ''
+
+        return true
+      },
+      resetForm () {
+        this.errorMessages = []
+        this.formHasErrors = false
+
+        Object.keys(this.form).forEach(f => {
+          this.$refs[f].reset()
+        })
+      },
+      submit () {
+        this.formHasErrors = false
+
+        Object.keys(this.form).forEach(f => {
+          if (!this.form[f]) this.formHasErrors = true
+
+          this.$refs[f].validate(true)
+        })
+        const body = {
+          "email": this.email,
+          "pw": this.pwd,
+          "name": this.name,
+          "grade": this.grade,
+          "class": this.ban,
+        }
+        this.$http.post("/register", body).then(result => {
+          console.log(result.data)
+        })
+      }
+    },
+    mounted(){
+      this.submit();
+    },
+  })
+  </script>
 </body>
-</html>

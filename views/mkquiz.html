@@ -8,7 +8,11 @@
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
-  <h1 style = "font-size : 60px; text-align: center;">Make Quiz</h1>
+  <style>
+    img { display: block; margin: 0px auto; }
+    @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+  </style>
+  <img width = 375 height = 150 src = "./logo.png">
   <h2 style = "text-align: center; margin-bottom : 10px;">Make Your Quiz</h2>
   <div id="app">
     <v-app id="inspire">
@@ -73,17 +77,6 @@
                   v-if="formHasErrors"
                   left
                 >
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      class="my-0"
-                      @click="resetForm"
-                      v-on="on"
-                    >
-                      <v-icon>refresh</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Refresh form</span>
                 </v-tooltip>
               </v-slide-x-reverse-transition>
               <v-btn color="primary" text @click="submit">Submit</v-btn>
@@ -97,77 +90,99 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <script>
-    cnt = 0;
-    new Vue({
-      el: '#app',
-      vuetify: new Vuetify(),
-      data: () => ({
-        countries: [1, 2, 3, 4],
-        errorMessages: '',
-        name: null,
-        address: null,
-        city: null,
-        state: null,
-        zip: null,
-        country: null,
-        formHasErrors: false,
-      }),
+  cnt = 0;
+  new Vue({
+    el: '#app',
+    vuetify: new Vuetify(),
+    data: () => ({
+      countries: [1,2,3,4],
+      errorMessages: '',
+      name: null,
+      address: null,
+      city: null,
+      state: null,
+      zip: null,
+      country: null,
+      formHasErrors: false,
+    }),
 
-      computed: {
-        form () {
-          return {
-            name: this.name,
-            address: this.address,
-            city: this.city,
-            state: this.state,
-            zip: this.zip,
-            country: this.country,
-          }
-        },
-      },
-
-      watch: {
-        name () {
-          this.errorMessages = ''
-        },
-      },
-
-      methods: {
-  			submit(){
-            cnt++;
-  					const data = {
-              "num": cnt,
-  				    "question": this.question,
-  				    "ex1": this.ex1,
-              "ex2": this.ex2,
-              "ex3": this.ex3,
-              "ex4": this.ex4,
-              "answer": this.answer
-  					}
-  					this.$http.post("/makequiz", data).then(result => {
-  						console.log(result.data)
-  					})
-  			}
-        done(){
-          const data = {
-            "question": this.question,
-            "ex1": this.ex1,
-            "ex2": this.ex2,
-            "ex3": this.ex3,
-            "ex4": this.ex4,
-            "answer": this.answer,
-            "done": 'done'
-          }
-          this.$http.post("/makequiz", data).then(result => {
-            console.log(result.data)
-            cnt = 0;
-          })
+    computed: {
+      form () {
+        return {
+          name: this.name,
+          address: this.address,
+          city: this.city,
+          state: this.state,
+          zip: this.zip,
+          country: this.country,
         }
-  		},
-  		mounted(){
-        this.submit();
-        this.done();
-  		}
-    })
+      },
+    },
+
+    watch: {
+      name () {
+        this.errorMessages = ''
+      },
+    },
+
+    methods: {
+      addressCheck () {
+        this.errorMessages = this.address && !this.name
+          ? 'Hey! I\'m required'
+          : ''
+
+        return true
+      },
+      resetForm () {
+        this.errorMessages = []
+        this.formHasErrors = false
+
+        Object.keys(this.form).forEach(f => {
+          this.$refs[f].reset()
+        })
+      },
+      submit () {
+        cnt++;
+        this.formHasErrors = false
+
+        Object.keys(this.form).forEach(f => {
+          if (!this.form[f]) this.formHasErrors = true
+
+          this.$refs[f].validate(true)
+        })
+        const data = {
+          "num": cnt,
+          "question": this.question,
+          "ex1": this.ex1,
+          "ex2": this.ex2,
+          "ex3": this.ex3,
+          "ex4": this.ex4,
+          "answer": this.answer
+        }
+        this.$http.post("/makequiz", data).then(result => {
+          console.log(result.data)
+        })
+      },
+      done(){
+        const data = {
+          "num": cnt,
+          "question": this.question,
+          "ex1": this.ex1,
+          "ex2": this.ex2,
+          "ex3": this.ex3,
+          "ex4": this.ex4,
+          "answer": this.answer,
+          "done": 'done'
+        }
+        this.$http.post("/makequiz", data).then(result => {
+          console.log(result.data)
+        })
+      }
+    },
+    mounted(){
+      this.submit();
+      this.done();
+    },
+  })
   </script>
 </body>
