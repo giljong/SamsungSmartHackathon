@@ -5,10 +5,11 @@ const router = express.Router();
 router.get('/',(req,res) => {
     let GameNum = req.query.id;
     if(GameNum !== undefined && req.session.user !== undefined){
-        db.query('select * from rank where pkey = ? ordry by score desc',GameNum,(err,result) =>{
+        db.query('select categorize from games where pkey = ? rimit 1',GameNum,(err,result) =>{
             if(err) console.log(err);
-            res.render('rank.ejs',{
-                result
+            db.query('select * from ' +result[0].categorize+ 'where pkey = ? order by cnt asc',GameNum,(results,error) =>{
+                if (error) console.log(error);
+                
             })
         })
     }
