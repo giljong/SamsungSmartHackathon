@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
   var border = $('#personal-border');
   var userMenu = $('.user-menu');
   var userBlock = $('.user-block');
@@ -40,7 +40,7 @@ $(document).ready(function() {
     border.removeClass('animate-border');
     border.addClass('remove-border');
   });
-  
+
   $('.menu-icon').mouseenter(function() {
     $('#menu-border').removeClass('remove-border');
     $('#menu-border').addClass('animate-border');

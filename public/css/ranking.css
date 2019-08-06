@@ -39,7 +39,7 @@ body {
 
 .search-bar{
   padding: 40px 10vw 0;
-  
+
 }
 
 .search{
@@ -391,7 +391,7 @@ footer {
   .row-team--header{
     display: none;
   }
-  
+
   .row-collapse{
     flex-direction: column;
   }
@@ -400,48 +400,48 @@ footer {
     margin-bottom: -37px;
     align-items: flex-start;
   }
-  
+
   .row-rank,
   .row-team{
     width: 275px;
     padding-left: 90px;
     font-size: 12px;
   }
-  
+
   .wordmark {
     height: 40px;
   }
-  
+
   .nav {
     padding: 0 10vw;
   }
-  
+
 }
 
 @media (max-width: 800px) {
-  
+
   .row-button:last-of-type{
     border-right: 0;
   }
-  
+
   .filter-by{
     flex-direction: column;
   }
-  
+
   .table-tab {
     border-top: 1px solid #E2E2E2;
     border-left: 0px;
   }
- 
+
   .tab-active {
     border-top: 1px solid #0196c1;
   }
-  
+
   .row-button{
     flex-grow: 1;
     text-align: center;
   }
-  
+
   .user-container {
     padding: 4px 15px;
   }
