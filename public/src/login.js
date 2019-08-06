@@ -7,11 +7,3 @@ $(".sign-in").on('click', function() {
   $("button").removeClass("hidden");
   $("form").toggleClass("hidden");
 })
-
-$("button").on('click', function() {
-  $(this).addClass("fab");
-  $("form").addClass("hidden");
-  $(".button").addClass("full");
-  $(".text").remove();
-  $(".header").removeClass("hidden");
-})

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <title>Make Quiz</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <h1 style = "font-size : 60px; text-align: center;">Make Quiz</h1>
+  <h2 style = "text-align: center; margin-bottom : 10px;">Make Your Quiz</h2>
+  <div id="app">
+    <v-app id="inspire">
+      <v-layout justify-center>
+        <v-flex xs12 sm10 md8 lg6>
+          <v-card ref="form">
+            <v-card-text>
+              <v-text-field
+                ref="question"
+                v-model="question"
+                :rules="[() => !!question || 'This field is required']"
+                label="Question"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="ex1"
+                v-model="ex1"
+                :rules="[() => !!ex1 || 'This field is required']"
+                :error-messages="errorMessages"
+                label="example 1"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="ex2"
+                v-model="ex2"
+                :rules="[() => !!ex2 || 'This field is required']"
+                :error-messages="errorMessages"
+                label="example 2"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="ex3"
+                v-model="ex3"
+                :rules="[() => !!ex3 || 'This field is required']"
+                :error-messages="errorMessages"
+                label="example 3"
+                required
+              ></v-text-field>
+              <v-text-field
+                ref="ex4"
+                v-model="ex4"
+                :rules="[() => !!ex4 || 'This field is required']"
+                :error-messages="errorMessages"
+                label="example 4"
+                required
+              ></v-text-field>
+              <v-autocomplete
+                ref="answer"
+                v-model="answer"
+                :rules="[() => !!answer || 'This field is required']"
+                :items="countries"
+                label="Answer"
+                required
+              ></v-autocomplete>
+            </v-card-text>
+            <v-divider class="mt-12"></v-divider>
+            <v-card-actions>
+              <v-btn text>Cancel</v-btn>
+              <v-spacer></v-spacer>
+              <v-slide-x-reverse-transition>
+                <v-tooltip
+                  v-if="formHasErrors"
+                  left
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      icon
+                      class="my-0"
+                      @click="resetForm"
+                      v-on="on"
+                    >
+                      <v-icon>refresh</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Refresh form</span>
+                </v-tooltip>
+              </v-slide-x-reverse-transition>
+              <v-btn color="primary" text @click="submit">Submit</v-btn>
+              <v-btn color="red" text @click="done">Done</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    cnt = 0;
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: () => ({
+        countries: [1, 2, 3, 4],
+        errorMessages: '',
+        name: null,
+        address: null,
+        city: null,
+        state: null,
+        zip: null,
+        country: null,
+        formHasErrors: false,
+      }),
+
+      computed: {
+        form () {
+          return {
+            name: this.name,
+            address: this.address,
+            city: this.city,
+            state: this.state,
+            zip: this.zip,
+            country: this.country,
+          }
+        },
+      },
+
+      watch: {
+        name () {
+          this.errorMessages = ''
+        },
+      },
+
+      methods: {
+  			submit(){
+            cnt++;
+  					const data = {
+              "num": cnt,
+  				    "question": this.question,
+  				    "ex1": this.ex1,
+              "ex2": this.ex2,
+              "ex3": this.ex3,
+              "ex4": this.ex4,
+              "answer": this.answer
+  					}
+  					this.$http.post("/makequiz", data).then(result => {
+  						console.log(result.data)
+  					})
+  			}
+        done(){
+          const data = {
+            "question": this.question,
+            "ex1": this.ex1,
+            "ex2": this.ex2,
+            "ex3": this.ex3,
+            "ex4": this.ex4,
+            "answer": this.answer,
+            "done": 'done'
+          }
+          this.$http.post("/makequiz", data).then(result => {
+            console.log(result.data)
+            cnt = 0;
+          })
+        }
+  		},
+  		mounted(){
+        this.submit();
+        this.done();
+  		}
+    })
+  </script>
+</body>
