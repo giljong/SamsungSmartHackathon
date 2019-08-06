@@ -2,129 +2,20 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>True or false quiz 2.0</title>
-  <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-<link rel="stylesheet" href="./oxquiz.css">
+  <link rel="stylesheet" href="../public/css/oxquiz.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-<style>
-</style>
-<div class="text-center">
-  <h1><b>O X 퀴즈</b>
-  <h4 id="score">/10</h4>
+<div class="grid">
+    <div id="quiz" class="centered grid__col--8">
+        <h1><%=title%></h1>
+        <h2><%=content%></h2>
+        <form action="/ox?pkey=<%pkey%> and id=<%id%>" method="POST">
+      <button style="width:300px; height:200px; font-size: 30px;"id="guess0" class="btn--default" onclick="window.location.href='/ox?pkey=<%pkey%> and id=<%id+1%>'" value="0" name="answer">Yes</button>
+      <button style="width:300px; height:200px;font-size: 30px;" id="guess1" class="btn--default" onclick="window.location.href='/ox?pkey=<%pkey%> and id=<%id+1%>'" value="1" name="answer">No</button>
+      </form>
+    </div>
 </div>
-<div style="height: auto; width: 80%; border:3px solid black; margin: auto;">
-<div class="container-fluid">
-  <div class=row>
-    <div class="col-md-7">
-      <h3 class="colomn-title">QUESTIONS</h3>
-      <br>
-    </div>
-    <div class="col-md-3">
-      <h4 style="text-align: right" class="colomn-title">YOUR ANSWERS</h4>
-    </div>
-    <div class="col-md-2">
-      <h4 class="pic colomn-title">RESULTS</h4>
-    </div>
-  </div>
-  <div class=row>
-    <div class="col-md-9">
-      <h3 class="question" id="ask1"><b>1:</b> The whale is a fish.</h3>
-      <h3 class="question" id="ask2"><b>2:</b> The dolphin is not a mammal.</h3>
-      <h3 class="question" id="ask3"><b>3:</b> The Nile crosses Sudan.</h3>
-      <h3 class="question" id="ask4"><b>4:</b> The longest part of human body is leg.</h3>
-      <h3 class="question" id="ask5"><b>5:</b> 1 byte is normally made from 8-bit.</h3>
-      <h3 class="question" id="ask6"><b>6:</b> The hardware is all that in the PC has weight.</h3>
-      <h3 class="question" id="ask7"><b>7:</b> Sun and Moon can be simultaneously in the sky.</h3>
-      <h3 class="question" id="ask8"><b>8:</b>The prologue is the final part of a book.</h3>
-      <h3 class="question" id="ask9"><b>9:</b> During the day you can not see stars.</h3>
-      <h3 class="question" id="ask10"><b>10:</b> The epicenter is the point from which is originated an earthquake.</h3>
-    </div>
-    <div class="col-md-2">
-      <h4 id="ans1">Answer1</h4>
-      <h4 id="ans2">Answer2</h4>
-      <h4 id="ans3">Answer3</h4>
-      <h4 id="ans4">Answer4</h4>
-      <h4 id="ans5">Answer5</h4>
-      <h4 id="ans6">Answer6</h4>
-      <h4 id="ans7">Answer7</h4>
-      <h4 id="ans8">Answer8</h4>
-      <h4 id="ans9">Answer9</h4>
-      <h4 id="ans10">Answer10</h4>
-    </div>
-    <div class="col-md-1">
-      <h5>
-      <img class="pic correct" id="correct0" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong0" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct1" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong1" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct2" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong2" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct3" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-       <img class="pic wrong" id="wrong3" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct4" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong4" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct5" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong5" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct6" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong6" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct7" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong7" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct8" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong8" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-      <h5>
-      <img class="pic correct" id="correct9" src="http://2012.igem.org/wiki/images/8/85/Amsterdam_checkmark.png" alt="Right!">
-      <img class="pic wrong" id="wrong9" src="http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/256/Letter-X-icon.png" alt="Wrong!">
-    </h5>
-    </div>
-  </div>
-  <div class="text-center">
-    <label>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    <button id="V" class="btn btn-success" name="choise"> O </button>
-  </label>
-    <label>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-   <button id="F" class="btn btn-danger" name="choise"> X </button>
- </label>
-    <h6 id="loser" class="lead">기초부터 차근차근 다시 복습해봅시다!</h6>
-    <h6 id="normal" class="lead">좋은 학습 상태이나 부족한 부분에 대한 복습이 필요합니다.</h6>
-    <h6 id="good" class="lead">좋은 학습 상태입니다! 복습하여 현 상태를 유지하세요.</h6>
-  </div>
-  <button id="retryButton">재시도</button>
-  </div>
-</div>
-<!-- partial -->
-  <script  src="./oxquiz.js"></script>
 
 </body>
 </html>
