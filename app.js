@@ -8,9 +8,13 @@ const myPageRouter = require('./routes/mypage');
 const loginRouter = require('./routes/login');
 const authRouter = require('./routes/auth');
 const registerRouter = require('./routes/register');
+const logoutRouter = require('./routes/logout');
+const oxRouter = require('./routes/ox');
+const testRouter = require('./routes/test');
+const makeRouter = require('./routes/insertP');
+const rankRouter = require('./routes/rank');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const logoutRouter = require('./routes/logout');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
@@ -22,13 +26,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
 
-//app.use('/', indexRouter);
+app.use('/', indexRouter);
 app.use('/mypage',myPageRouter);
 app.use('/login',loginRouter);
 app.use('/auth',authRouter);
 app.use('/register',registerRouter);
 app.use('/logout',logoutRouter);
-
+app.use('/make',makeRouter);
+app.use('/ox',oxRouter);
+app.use('/rank',rankRouter);
+app.use('/test',testRouter);
 
 app.use(helmet());
 
@@ -45,7 +52,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('404.ejs');
+  res.redirect('/');
 });
 
 app.listen(3000, "0.0.0.0", () => {
