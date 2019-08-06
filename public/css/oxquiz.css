@@ -1,0 +1,87 @@
+#questionMark {
+  width: 200px;
+}
+#V {
+  color: #050;
+  font-size: 120px;
+}
+#F {
+  color: #800;
+    font-size: 120px;
+}
+.wrong {
+  width: 39px;
+  margin: 3px;
+}
+.correct {
+  width: 41px;
+  margin: 2px;
+}
+.timer{
+  width: 120px;
+  margin: auto;
+  round-borders: 50%;
+  background-color: #EBFBFF;
+}
+body {
+  background-color: rgba(35,40,30,0.13);
+
+  }
+  h1 {
+   color: #1E80Fe;
+   font-family: Agency FB, Courier;
+   font-size: 110px;
+  }
+h3 {
+  text-align: left;
+  font-size: 30px;
+}
+  h4 {
+   font-size: 30px;
+   margin-top: 20px;
+  }
+  h5{
+   margin-top: 6px;
+   font-size: 28px;
+  }
+h6 {
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+   font-size: 14px;
+   line-height: 20px;
+   text-transform: uppercase;
+   color: #444;
+   
+}
+  .colomn-title {
+   text-align: center;
+   font-family: Comic Sans, Script;
+   color: #251;
+  }
+  button {
+    size: 100px;
+    margin: 10px;
+    width: 300px;
+    height: 250px;
+    padding: 10px;
+    font-size: 30px;
+    font-family: Impact;
+  }
+  p {
+   color: red;
+   font-size: 40px;
+  }
+  #timeout {
+   color: red;
+   font-family: Agency FB, Courier;
+   font-size: 110px;
+   margin: 40 px;
+  }
+#retryButton {
+  background-color: yellow;
+  width: 130px;
+  padding: 2px;
+  color: #1E80Fe;
+  float: right;
+  border-color: #f90;
+  border-width: 13px;
+}
