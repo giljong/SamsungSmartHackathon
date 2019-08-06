@@ -8,7 +8,9 @@ router.get('/',(req,res) => {
         db.query('select * from rank where pkey = ? ordry by score desc',GameNum,(err,result) =>{
             if(err) console.log(err);
             res.render('rank.ejs',{
-                result
+                data : result,
+                class : req.session.class,
+                username : req.session.user
             })
         })
     }
@@ -16,10 +18,14 @@ router.get('/',(req,res) => {
         db.query('select * from Users where class = ? order by score desc',req.session.class,(err,result) =>{
             if(err) console.log(err);
             res.render('rank.ejs',{
-                result
+                data : result,
+                username : 'guest',
+                class : '0반'
             })
         })
     }
     else
         res.redirect('/');
 })
+
+module.exports = router;

@@ -22,6 +22,7 @@ router.post('/',(req,res)=>{
         else {
             req.session.flag = result[0].FLAG;
             req.session.user = id;
+            req.session.class = result[0].class
             req.session.save(() => {
                 console.log(time+ ': '+id + ' 로그인 성공 - '+ ip);
                 res.send('<script type="text/javascript">alert("로그인 성공!");window.location.href = "/auth";</script>');
