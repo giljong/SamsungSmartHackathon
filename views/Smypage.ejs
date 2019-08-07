@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>grassrootsPB - Leaderboards</title>
+  <script src="https://use.typekit.net/vzx5kdj.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"><link rel="stylesheet" href="../css/ranking.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<nav class="nav flex">
+  <img width = "250" height = "82.5" src="../img/logo.png">
+
+  <div class="user-navigation flex">
+    <div class="user-block pointer">
+      <div id="personal-border" class="user-border flex absolute bright-blue"></div>
+      <div class="user-container flex align-center relative">
+        <img class="avatar" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/225473/berner_avatar.png" />
+        <div class="user-info flex column justify-center">
+        </div>
+        <svg class="dropdown-icon" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10l5 5 5-5z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+        <svg class="dropup-icon" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 14l5-5 5 5z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+      </div>
+      <div class="user-menu flex column absolute">
+        <a class="nav-link flex align-center pointer"> <svg class="menu-link-icon" fill="#4a4a4a" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+  </svg>My Page</a>
+        <a class="nav-link flex align-center pointer">
+          <svg class="menu-link-icon" fill="#4a4a4a" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg> Sign Out
+        </a>
+      </div>
+    </div>
+
+
+  </div>
+</nav>
+
+<div class="content">
+  <div class="leaderboard flex column wrap">
+    <div class="leaderboard-table flex column">
+      <div class="leaderboard-header flex column grow">
+
+
+
+          <div style = "border-color : black; height:40px;" class="leaderboard-row flex align-center row--header" style="border-radius: 0 !important;">
+            <div class="row-position">퀴즈명</div>
+            <div class="row-collapse flex align-center">
+              <div class="row-user--header">&emsp;&emsp;&emsp;&emsp;&emsp;문제 유형</div>
+              <div class="row-team--header">정답</div>
+              <div class="row-rank--header">나의 답</div>
+            </div>
+            <div class="row-calls">내 점수</div>
+          </div>
+        </div>
+
+
+    <div class="leaderboard-body flex column grow">
+      <div class="leaderboard-row flex align-center">
+        <div class="row-position">OXquiz</div>
+        <div class="row-collapse flex align-center">
+          <div class="row-caller flex">
+            <div class="row-user">O/X Quiz</div>
+          </div>
+          <div class="row-team">XXOX</div>
+          <div class="row-rank">OXXX</div>
+        </div>
+        <div class="row-calls">2</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<!-- partial -->
+  <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+<script  src="..src/ranking.js"></script>
+
+</body>
+</html>

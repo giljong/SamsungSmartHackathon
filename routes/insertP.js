@@ -4,18 +4,9 @@ const db = require('../db/connection');
 const randomstring = require('randomstring');
 
 router.get('/', (req, res) => {
-    db.query('select * from users where email = ?', req.session.user, (err, result) => {
-        if (err) console.log(err);
-        if (result[0].TEA === 1) {
-            res.render('selectC.ejs');
-        }
-        else {
-            res.redirect('/')
-        }
-
-    })
+    res.sendFile(__dirname + '/selectc.html')
 }).get('/quiz', (req, res) => {
-    res.render('makeQuiz.ejs');
+    res.render('mkquiz.ejs');
     pkey = randomstring.generate(8);
 }).post('/quiz', (req, res) => {
     const title = req.data.title;
@@ -25,7 +16,7 @@ router.get('/', (req, res) => {
         res.redirect('/mypage');
     }
 }).get('/ox', (req, res) => {
-    res.render('makeQuiz.ejs');
+    res.render('mkquiz.ejs');
     pkey = randomstring.generate(8);
 }).post('/ox', (req, res) => {
     const title = req.data.title;

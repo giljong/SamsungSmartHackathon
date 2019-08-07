@@ -4,7 +4,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-  <title>Make Quiz</title>
+  <title>Register</title>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
@@ -12,8 +12,7 @@
     img { display: block; margin: 0px auto; }
     @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
   </style>
-  <img width = 375 height = 150 src = "./logo.png">
-  <h2 style = "text-align: center; margin-bottom : 10px;">Make Your Quiz</h2>
+  <img width = 375 height = 150 src = "../img/logo.png">
   <div id="app">
     <v-app id="inspire">
       <v-layout justify-center>
@@ -21,52 +20,44 @@
           <v-card ref="form">
             <v-card-text>
               <v-text-field
-                ref="question"
-                v-model="question"
-                :rules="[() => !!question || 'This field is required']"
-                label="Question"
+                ref="email"
+                v-model="email"
+                :rules="[() => !!email || 'This field is required']"
+                label="Email"
                 required
               ></v-text-field>
               <v-text-field
-                ref="ex1"
-                v-model="ex1"
-                :rules="[() => !!ex1 || 'This field is required']"
+                ref="pwd"
+                v-model="pwd"
+                :rules="[() => !!pwd || 'This field is required']"
                 :error-messages="errorMessages"
-                label="example 1"
+                label="password"
                 required
               ></v-text-field>
               <v-text-field
-                ref="ex2"
-                v-model="ex2"
-                :rules="[() => !!ex2 || 'This field is required']"
+                ref="name"
+                v-model="name"
+                :rules="[() => !!name || 'This field is required']"
                 :error-messages="errorMessages"
-                label="example 2"
+                label="Name"
                 required
               ></v-text-field>
               <v-text-field
-                ref="ex3"
-                v-model="ex3"
-                :rules="[() => !!ex3 || 'This field is required']"
+                ref="grade"
+                v-model="grade"
+                :rules="[() => !!grade || 'This field is required']"
                 :error-messages="errorMessages"
-                label="example 3"
+                label="Grade"
                 required
               ></v-text-field>
               <v-text-field
-                ref="ex4"
-                v-model="ex4"
-                :rules="[() => !!ex4 || 'This field is required']"
+                ref="ban"
+                v-model="ban"
+                :rules="[() => !!ban || 'This field is required']"
                 :error-messages="errorMessages"
-                label="example 4"
+                label="Class"
                 required
               ></v-text-field>
-              <v-autocomplete
-                ref="answer"
-                v-model="answer"
-                :rules="[() => !!answer || 'This field is required']"
-                :items="countries"
-                label="Answer"
-                required
-              ></v-autocomplete>
             </v-card-text>
             <v-divider class="mt-12"></v-divider>
             <v-card-actions>
@@ -80,7 +71,6 @@
                 </v-tooltip>
               </v-slide-x-reverse-transition>
               <v-btn color="primary" text @click="submit">Submit</v-btn>
-              <v-btn color="red" text @click="done">Done</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -90,7 +80,6 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <script>
-  cnt = 0;
   new Vue({
     el: '#app',
     vuetify: new Vuetify(),
@@ -142,7 +131,6 @@
         })
       },
       submit () {
-        cnt++;
         this.formHasErrors = false
 
         Object.keys(this.form).forEach(f => {
@@ -150,38 +138,20 @@
 
           this.$refs[f].validate(true)
         })
-        const data = {
-          "num": cnt,
-          "question": this.question,
-          "ex1": this.ex1,
-          "ex2": this.ex2,
-          "ex3": this.ex3,
-          "ex4": this.ex4,
-          "answer": this.answer
+        const body = {
+          "email": this.email,
+          "pw": this.pwd,
+          "name": this.name,
+          "grade": this.grade,
+          "class": this.ban,
         }
-        this.$http.post("/makequiz", data).then(result => {
-          console.log(result.data)
-        })
-      },
-      done(){
-        const data = {
-          "num": cnt,
-          "question": this.question,
-          "ex1": this.ex1,
-          "ex2": this.ex2,
-          "ex3": this.ex3,
-          "ex4": this.ex4,
-          "answer": this.answer,
-          "done": 'done'
-        }
-        this.$http.post("/makequiz", data).then(result => {
+        this.$http.post("/register", body).then(result => {
           console.log(result.data)
         })
       }
     },
     mounted(){
       this.submit();
-      this.done();
     },
   })
   </script>

@@ -24,6 +24,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 app.set('view engine', 'ejs');
 
 app.use('/', indexRouter);
@@ -55,7 +56,7 @@ app.use(function(err, req, res, next) {
   res.redirect('/');
 });
 
-app.listen(3000, "0.0.0.0", () => {
+app.listen(3000, () => {
   console.log("connect");
 });
 

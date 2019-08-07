@@ -17,15 +17,21 @@ router.get('/', (req, res) => {
         res.redirect('/login');
     }
     else{
-        db.query('select categorize from games where pkey = ?',req.body.pkey,(err,result) => {
-            if(err) console.log(err);
-            if(result[0].categorize === 'test'){
-                res.redirect('/test?pkey=' + req.body.pkey+'and id=0')
-            }
-            else{
-                res.redirect('/ox?pkey='+req.body.pkey+'and id=0');
-            }
-        })
+        if(req.body.key == '1234'){
+            res.render('oxquiz');
+        }
     }
+}).get('/2',(req,res) => {
+    res.render('ox2');
+})
+.get('/3',(req,res) => {
+    res.render('ox3');
+})
+.get('/4',(req,res) => {
+    res.render('ox4');
+}).get('/mypage',(req,res) => {
+    res.render('ranking');
+}).get('/smypage',(req,res) => {
+    res.render('smypage');
 })
 module.exports = router;

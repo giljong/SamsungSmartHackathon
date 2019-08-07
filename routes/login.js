@@ -5,7 +5,7 @@ const moment = require('moment');
 const router = express.Router();
 
 router.post('/',(req,res)=>{
-    const id = req.body.email;
+    const id = req.body.id;
     var tmpPw = req.body.pw;
     const time = moment().format('MMMM Do YYYY, h:mm:ss a');
     const pw = crypto.createHash('sha512').update(tmpPw).digest('base64');
@@ -13,7 +13,7 @@ router.post('/',(req,res)=>{
     req.connection.remoteAddress ||
     req.socket.remoteAddress ||
     req.connection.socket.remoteAddress;
-    db.query('select * from Users where EMAIL = ? and PW = ?' , [id,pw], (err, result) => {
+    db.query('select * from Users where EMAIL = ? and PW = ?' , [req.body.id,pw], (err, result) => {
 		if (err) throw err;
         if(result.length === 0){
             res.send('<script type="text/javascript">alert("로그인 실패!");window.location.href="/login"</script>');
@@ -22,8 +22,8 @@ router.post('/',(req,res)=>{
         else {
             req.session.flag = result[0].FLAG;
             req.session.user = id;
-            req.session.class = result[0].class;
-            req.session.grade = result[0].grade;
+            req.session.class = result[0].CLASS;
+            req.session.grade = 2;
             req.session.save(() => {
                 console.log(time+ ': '+id + ' 로그인 성공 - '+ ip);
                 res.send('<script type="text/javascript">alert("로그인 성공!");window.location.href = "/auth";</script>');
